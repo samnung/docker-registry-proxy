@@ -26,12 +26,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildxarch-
 
-      - name: Docker Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
       - name: Docker Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
@@ -53,7 +47,7 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64
-          tags: rpardini/docker-registry-proxy:latest,ghcr.io/rpardini/docker-registry-proxy:latest
+          tags: samnung/docker-registry-proxy:latest,ghcr.io/samnung/docker-registry-proxy:latest
           push: true
           cache-from: type=local,src=/tmp/.buildx-cache/release
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache/release
@@ -68,7 +62,7 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64
-          tags: rpardini/docker-registry-proxy:latest-debug,ghcr.io/rpardini/docker-registry-proxy:latest-debug
+          tags: samnung/docker-registry-proxy:latest-debug,ghcr.io/samnung/docker-registry-proxy:latest-debug
           push: true
           cache-from: type=local,src=/tmp/.buildx-cache/debug
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache/debug
